@@ -1,6 +1,6 @@
-*.exe
-*.swp
-*.dsk
-*.obj
-*.lib
-*.bak
+./**/*.exe
+./**/*.swp
+./**/*.dsk
+./**/*.obj
+./**/*.lib
+./**/*.bak
