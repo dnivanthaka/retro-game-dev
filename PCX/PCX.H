@@ -34,9 +34,9 @@ typedef struct {
 	byte_t num_planes;
 	word_t bytes_per_line;
 	word_t palette_info;
-	word_t h_screen_size;
-	word_t v_screen_size;
-	byte_t filler[54];
+	//word_t h_screen_size;
+	//word_t v_screen_size;
+	byte_t filler[58];
 } pcx_header_t;
 
 typedef struct {

@@ -4,14 +4,8 @@
 #include <conio.h>
 #include <bios.h>
 #include "screen.h"
-
-#define KEY_UP   1
-#define KEY_DOWN 0
-
-#define KEYBOARD_INTERRUPT 0x09
-#define KEY_BUFFER         0x60
-#define KEY_CONTROL        0x61
-#define PIC_PORT           0x20
+#include "keyboard.h"
+#include "timer.h"
 
 word_t raw_scan_code;
 word_t keyboard_state[128];
@@ -68,25 +62,6 @@ void keyboard_remove_driver()
 	_dos_setvect(KEYBOARD_INTERRUPT, old_keyboard_isr);
 }
 
-/*byte_t get_scan_code()
-{
-   _asm{
-		mov ah, 01h
-		int 16h
-		jz buffer_empty
-		mov ah, 00h
-		int 16h
-		mov al, ah
-		xor ah, ah
-		jmp done
-
-		buffer_empty:
-		xor ax, ax
-		done:
-		nop
-	};
-}*/
-
 byte_t get_key()
 {
 	if(_bios_keybrd(_KEYBRD_READY)){
@@ -101,7 +76,7 @@ byte_t get_key()
 int main(void){
 
 	//setmode(VGA_256_COLOR_MODE);
-	//vgafill(0x0);
+	//vgafill(0x09);
 
 	//while(!kbhit());
 	//printf("%d\n", get_key());
@@ -109,9 +84,17 @@ int main(void){
 	//while((key = get_key()) == 0){}
 	//printf("%d\n", key);
 	keyboard_install_driver();
-	while(raw_scan_code != 1){
+	//timer_start();
+	while(!keyboard_state[MAKE_ESC]){
+		timer_start();
 		printf("%d\n", raw_scan_code);
+		qword_t ticks = timer_getticks();
+		// 1s = 18.2
+		while(ticks < 18){
+		  ticks = timer_getticks();
+		}
 	}
+	keyboard_remove_driver();
 
 	//setmode(TEXT_MODE);
 

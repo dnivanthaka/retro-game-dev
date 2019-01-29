@@ -42,16 +42,12 @@ void vgaset(word_t offset, byte_t value, int len)
 
 void vgafill(word_t color)
 {
-	/*asm {
-		push bp
-		mov bp, sp
-		push di
+	asm {
 		les di, VGAMEM
-		mov cx, SCREEN_WIDTH/4 * SCREEN_HEIGHT
-		mov ax, color
+		mov cx, SCREEN_WIDTH * SCREEN_HEIGHT / 2
+		mov al, BYTE PTR color
+		mov ah, al
 		rep stosw
-		pop di
-		pop bp
-	};*/
-	memset(VGAMEM, color, SCREEN_WIDTH * SCREEN_HEIGHT);
+	};
+	//memset(VGAMEM, color, SCREEN_WIDTH * SCREEN_HEIGHT);
 }
