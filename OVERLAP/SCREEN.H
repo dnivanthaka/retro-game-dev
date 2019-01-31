@@ -1,0 +1,28 @@
+#ifndef SCREEN_H
+#define SCREEN_H
+
+#include "types.h"
+
+#define VIDEO_INT          0x10
+#define SET_MODE           0x00
+#define VGA_256_COLOR_MODE 0x13
+#define TEXT_MODE          0x03
+#define SCREEN_WIDTH       320
+#define SCREEN_HEIGHT      200
+#define NUM_COLORS         256
+#define COLOR_REGISTER_RD  0x03C7
+#define COLOR_REGISTER_WR  0x03C8
+#define PALETTE_DATA       0x03C9
+
+extern byte_t *VGAMEM;
+
+void setmode(byte_t mode);
+void setpixel(int x, int y, byte_t color);
+void setpalette(int start_reg,int end_reg, rgb_palette_t *palette);
+void getpalette(int start_reg,int end_reg, rgb_palette_t *palette);
+void vgacpy(byte_t *src, word_t offset, int len);
+void vgaset(word_t offset, byte_t value, int len);
+void vgafill(word_t color);
+void read_color_reg(int index, rgb_t *color);
+void write_color_reg(int index, rgb_t *color);
+#endif

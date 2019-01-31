@@ -74,6 +74,7 @@ byte_t get_key()
 
 
 int main(void){
+
 	//setmode(VGA_256_COLOR_MODE);
 	//vgafill(0x09);
 

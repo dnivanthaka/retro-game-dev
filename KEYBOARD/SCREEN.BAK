@@ -54,4 +54,5 @@ void vgafill(word_t color)
 		mov ah, al
 		rep stosw
 	};
+	//memset(VGAMEM, color, SCREEN_WIDTH * SCREEN_HEIGHT);
 }
