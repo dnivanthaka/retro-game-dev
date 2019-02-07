@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 	//image_put_colorkey(&worm_image, VGAMEM, 0);
 	word_t offset = 100 * SCREEN_WIDTH + 100; //y * width + x
 
-	sprite_get(&spworm, &worm_image, 1);
+	sprite_get(&spworm, &worm_image, 0);
 
 	//sprite_draw(&spworm, VGAMEM);
 
